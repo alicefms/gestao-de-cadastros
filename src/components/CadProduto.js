@@ -1,4 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import './style.css';
+
 
 class Produto {
     constructor(nome, tipo, ref, qte) {
@@ -10,8 +13,9 @@ class Produto {
 }
 
 
+function SalvarProduto(e) {
 
-function salvarProduto(e) {
+
     e.preventDefault()
     let nome = document.getElementById("tipo").value;
     let tipo = document.getElementById("tipo").value;
@@ -23,6 +27,8 @@ function salvarProduto(e) {
     localStorage.setItem('produto', [produtosCadastrados, (JSON.stringify(novoProduto))]);
 
     alert('Produto Cadastrado com sucesso!')
+
+
 }
 
 export default function CadProduto() {
@@ -35,7 +41,7 @@ export default function CadProduto() {
                 <input type="text" id="nome" placeholder="nome do produto" />
 
                 <label>Tipo</label>
-                <input type="text" id="tipo" />
+                <input type="text" placeholder="tipo do produto" id="tipo" />
 
                 <label>Referência</label>
                 <input type="number" id="ref" placeholder="código de referência" />
@@ -43,9 +49,11 @@ export default function CadProduto() {
 
                 <label>Quantidade</label>
                 <input type="number" id="qte" placeholder="quantidade no estoque" />
-                <input type="submit" value="Cadastrar" onClick={salvarProduto} />
+                <input type="submit" className="button" value="Cadastrar" onClick={SalvarProduto} />
 
             </form>
+
+            <Link to="/" className="button voltar" >Voltar para Início</Link>
         </div>
     )
 }

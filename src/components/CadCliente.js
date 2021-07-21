@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import './style.css';
 
 class Cliente {
     constructor(nome, email, telefone) {
@@ -37,9 +39,11 @@ export default function CadCliente() {
 
                 <label>Telefone</label>
                 <input type="number" id="telefone" placeholder="telefone do cliente" />
-                <input type="submit" value="Cadastrar" onClick={salvarCliente} />
+                <input type="submit" className="button" value="Cadastrar" onClick={salvarCliente} />
 
             </form>
+
+            <Link to="/" className="button voltar">Voltar para Início</Link>
         </div>
     )
 }

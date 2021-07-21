@@ -1,14 +1,17 @@
-
-import './App.css';
+import Routes from './routes';
 
 function App() {
   return (
+    < >
 
-    <div id="root">
+      <p className="header"> ModaMais</p>
 
+      <Routes />
+      <footer>
+        <p>Desenvolvido por Alice Moraes </p>
+      </footer>
 
-    </div>
-
+    </>
   );
 }
 
