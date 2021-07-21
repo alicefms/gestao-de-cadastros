@@ -24,7 +24,9 @@ function SalvarProduto(e) {
     const novoProduto = new Produto(nome, tipo, ref, qte)
     let produtosCadastrados = localStorage.getItem('produto')
 
-    localStorage.setItem('produto', [produtosCadastrados, (JSON.stringify(novoProduto))]);
+    if (produtosCadastrados)
+        localStorage.setItem('produto', produtosCadastrados.concat(JSON.stringify(novoProduto)))
+    else localStorage.setItem('produto', JSON.stringify(novoProduto))
 
     alert('Produto Cadastrado com sucesso!')
 
