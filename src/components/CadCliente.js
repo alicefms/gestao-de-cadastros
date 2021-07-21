@@ -2,11 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './style.css';
 
-class Cliente {
-    constructor(nome, email, telefone) {
+export class Cliente {
+    constructor(nome, email, telefone, endereco) {
         this.nome = nome;
         this.email = email;
-        this.telefone = telefone
+        this.telefone = telefone;
+        this.endereco = endereco
     }
 }
 
@@ -17,10 +18,12 @@ function salvarCliente(e) {
     let nome = document.getElementById("nome").value;
     let email = document.getElementById("email").value;
     let telefone = document.getElementById("telefone").value;
-    const novoCliente = new Cliente(nome, email, telefone)
+    let endereco = document.getElementById("endereco").value;
+    const novoCliente = new Cliente(nome, email, telefone, endereco)
     let clientesCadastrados = localStorage.getItem('cliente')
-
-    localStorage.setItem('cliente', [clientesCadastrados, (JSON.stringify(novoCliente))]);
+    if (clientesCadastrados)
+        localStorage.setItem('cliente', clientesCadastrados.concat(JSON.stringify(novoCliente)))
+    else localStorage.setItem('cliente', JSON.stringify(novoCliente))
 
     alert('Cliente Cadastrado com sucesso!')
 }
@@ -39,6 +42,12 @@ export default function CadCliente() {
 
                 <label>Telefone</label>
                 <input type="number" id="telefone" placeholder="telefone do cliente" />
+
+                <label>Endereço</label>
+                <input type="text" id="endereco" placeholder="endereço do cliente" />
+
+
+
                 <input type="submit" className="button" value="Cadastrar" onClick={salvarCliente} />
 
             </form>
