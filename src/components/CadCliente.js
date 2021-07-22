@@ -12,18 +12,28 @@ export class Cliente {
 }
 
 
-
 function salvarCliente(e) {
+
     e.preventDefault()
     let nome = document.getElementById("nome").value;
     let email = document.getElementById("email").value;
     let telefone = document.getElementById("telefone").value;
     let endereco = document.getElementById("endereco").value;
     const novoCliente = new Cliente(nome, email, telefone, endereco)
-    let clientesCadastrados = localStorage.getItem('cliente')
-    if (clientesCadastrados)
-        localStorage.setItem('cliente', clientesCadastrados.concat(JSON.stringify(novoCliente)))
-    else localStorage.setItem('cliente', JSON.stringify(novoCliente))
+
+    let clientesCadastrados = []
+    const clientesAntigos = localStorage.getItem('cliente')
+
+    if (!clientesAntigos) {
+        clientesCadastrados.push(novoCliente)
+        localStorage.setItem('cliente', JSON.stringify(clientesCadastrados))
+    } else {
+        clientesCadastrados = JSON.parse(clientesAntigos)
+        clientesCadastrados.push(novoCliente)
+        localStorage.setItem('cliente', JSON.stringify(clientesCadastrados))
+
+    }
+
 
     alert('Cliente Cadastrado com sucesso!')
 }

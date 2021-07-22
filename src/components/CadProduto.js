@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './style.css';
 
-
 class Produto {
     constructor(nome, tipo, ref, qte) {
         this.nome = nome;
@@ -15,18 +14,26 @@ class Produto {
 
 function SalvarProduto(e) {
 
-
     e.preventDefault()
     let nome = document.getElementById("tipo").value;
     let tipo = document.getElementById("tipo").value;
     let ref = document.getElementById("ref").value;
     let qte = document.getElementById("qte").value;
     const novoProduto = new Produto(nome, tipo, ref, qte)
-    let produtosCadastrados = localStorage.getItem('produto')
 
-    if (produtosCadastrados)
-        localStorage.setItem('produto', produtosCadastrados.concat(JSON.stringify(novoProduto)))
-    else localStorage.setItem('produto', JSON.stringify(novoProduto))
+    let produtosCadastrados = []
+    const produtosAntigos = localStorage.getItem('produto')
+
+    if (!produtosAntigos) {
+        produtosCadastrados.push(novoProduto)
+        localStorage.setItem('produto', JSON.stringify(produtosCadastrados))
+    } else {
+        produtosCadastrados = JSON.parse(produtosAntigos)
+        produtosCadastrados.push(novoProduto)
+        localStorage.setItem('produto', JSON.stringify(produtosCadastrados))
+
+    }
+
 
     alert('Produto Cadastrado com sucesso!')
 
